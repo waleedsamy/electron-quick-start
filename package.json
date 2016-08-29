@@ -7,6 +7,7 @@
     "url": "https://github.com/ngoldman/electron-hello-world/issues"
   },
   "devDependencies": {
+    "electron-packager": "^7.7.0",
     "electron-prebuilt": "^0.34.0"
   },
   "homepage": "https://github.com/ngoldman/electron-hello-world",
@@ -27,6 +28,8 @@
   },
   "scripts": {
     "start": "electron .",
+    "build-mac": "electron-packager . electron-hello-world --platform=darwin --arch=x64 --overwrite",
+    "build-win": "electron-packager . electron-hello-world --platform=win32 --arch=x64 --overwrite",
     "test": "echo \"Error: no test specified\" && exit 1"
   }
 }

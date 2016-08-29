@@ -1,10 +1,6 @@
 # Electron Hello World
 
-A quick way to get a Hello World Electron app running locally.
-
-**Update**: looks like the Atom team has created [electron-quick-start](https://github.com/atom/electron-quick-start), a similarly inspired endeavor! Please use that instead.
-
-**No longer supported or maintained. Use at your own risk.**
+A quick way to get a Hello World Electron app running locally. and interact with host machine, like running application or load files.
 
 ## How To
 
@@ -16,8 +12,10 @@ git clone git@github.com:ngoldman/electron-hello-world.git
 
 ### 2. `cd` into the repo directory and run `npm install`
 
-```
+```bash
 cd electron-hello-world
+# download teamviewer get.teamviewer.com/traffics
+# put it inside current directory
 npm install
 ```
 
@@ -27,7 +25,43 @@ npm install
 npm start
 ```
 
+### build for windows
+
+```
+npm run build-win
+```
+
+### if you don't have windows machine
+
+```
+vagrant up
+```
 If everything went well you should be staring in awe at a Hello World application. Yay!
+
+
+### HOW It Work
+
+### 1. TeamViewerQS(.exe, .app) should be existed in your project path
+### 2. import required modules
+```
+ var child_process = require('child_process');
+ var appPath = process.resourcesPath + "/app/";
+```
+### 3. `executeTVWin` will get `TeamViewerQS.exe` and start it as
+ ```
+ function executeTVWin() {
+     var executablePath = appPath + 'TeamViewerQS.exe';
+     child_process.execFile(executablePath);
+ }
+ ```
+### 4. `executeTVMac` will get `TeamViewerQS.app` and start it as
+ ```
+ function executeTVMac() {
+     var executablePath = appPath + 'TeamViewerQS.app';
+     child_process.exec('open -a ' + executablePath);
+ }
+ ```
+### 5. call `executeTVWin` or `executeTVMac` to start TeamViewer app on windows or Mac respectively.
 
 ## Learn more
 

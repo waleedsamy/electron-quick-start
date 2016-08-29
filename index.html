@@ -1,15 +1,60 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <title>Hello World!</title>
-  </head>
-  <body>
-    <h1>Hello World!</h1>
-    We are using io.js <script>document.write(process.version)</script>
-    and Electron <script>document.write(process.versions['electron'])</script>.
-  </body>
-  <script>
-    var remote = require('remote');
-    console.log('app version ' + remote.require('app').getVersion());
-  </script>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<body>
+    <h1>Hello World!</h1> We are using io.js
+    <script>
+        document.write(process.version)
+    </script>
+    and Electron
+    <script>
+        document.write(process.versions['electron'])
+    </script>.
+</body>
+
+<!-- Insert this line above script imports  -->
+<script>
+    if (typeof module === 'object') {
+        window.module = module;
+        module = undefined;
+    }
+</script>
+
+<!-- Insert this line after script imports -->
+<script>
+    if (window.module) module = window.module;
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script>
+    var child_process = require('child_process');
+    var appPath = process.resourcesPath + "/app/";
+
+    function executeTVWin() {
+        var executablePath = appPath + 'TeamViewerQS.exe';
+        child_process.execFile(executablePath);
+    }
+
+    function executeTVMac() {
+        var executablePath = appPath + 'TeamViewerQS.app';
+        child_process.exec('open -a ' + executablePath);
+    }
+</script>
+
+<div class="btn-group" role="group" aria-label="...">
+    <button type="button" class="btn btn-default" onClick="executeTVWin()">Windows support</button>
+    <button type="button" class="btn btn-default" onClick="executeTVMac()">Mac support</button>
+</div>
+<div class="panel panel-default">
+    <div class="panel-body" id="contents">
+    </div>
+</div>
+
 </html>
